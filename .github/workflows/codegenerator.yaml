@@ -9,6 +9,12 @@ on:
     paths:
       - 'fidl/**.fidl'
       - 'fidl/**.fdepl'
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [ "main" ]
+    paths:
+      - 'fidl/**.fidl'
+      - 'fidl/**.fdepl'
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel.
@@ -50,3 +56,19 @@ jobs:
           git add src-gen
           git commit -m "Auto Generated fidl" || true 
           git push
+
+      - name: 6) Checkout pull request HEAD commit
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch origin +refs/pull/${{ github.event.pull_request.number }}/merge
+          git checkout -qf FETCH_HEAD
+      
+      - name: 7) Commit and push changes for pull request
+        if: github.event_name == 'pull_request'
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add src-gen
+          git commit -m "Auto Generated fidl" || true  # 커밋할 변경사항이 없으면 실패하지 않도록 함
+          # 아래 명령어를 통해 원본 레포지토리의 PR 브랜치로 푸시
+          git push origin HEAD:refs/heads/${{ github.head_ref }}
