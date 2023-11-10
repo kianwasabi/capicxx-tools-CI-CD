@@ -48,8 +48,7 @@ jobs:
       - name: Generate CommonAPI Code from vSOME/IP Generator
         run: |
           echo $(find ${{ github.workspace }} -type f -name '*.fdepl')
-          someip-generator/commonapi-someip-generator-linux-x86_64 -sk $(find ${{ github.workspace }} -type f -name '*.fdepl') -d ${{ github.workspace }}/src-gen/someip
-
+          someip-generator/commonapi-someip-generator-linux-x86_64 $(find ${{ github.workspace }} -type f -name '*.fdepl') -d ${{ github.workspace }}/src-gen/someip
       - name: Save Changes
         if: github.event_name == 'push'
         run: |
