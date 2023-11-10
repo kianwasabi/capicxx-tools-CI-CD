@@ -1,9 +1,8 @@
-# Trigger that will run the workflow. 
-# The workflow will start on push events to the "main" branch.
-# (Run this workflow manually or from the Actions tab)
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel.
-# This workflow contains a single job called "commonapi-code-generator".
-# Steps represents a sequence of tasks that will be executed as part of the job.
+# This workflow generates CommonAPI code from fidl and fdepl files using the CommonAPI Core and vSOME/IP Generators.
+# The workflow is triggered on push events to the "main" branch and when changes are made to fidl and fdepl files.
+# The generated code is saved in the src-gen folder and committed and pushed to the repository.
+# The workflow contains a single job called "commonapi-code-generator" that runs on ubuntu-latest.
+# The job has six steps that checkout the repository, delete old generated code, download the generators, generate CommonAPI code, and save the generated code.
 name: CI-CD CommonAPI Code Generator
 
 on:
@@ -22,7 +21,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          
+
       - name: 1) Delete old generated code, if exists. And create new folders.
         run: |
           rm -rf ${{ github.workspace }}/src-gen
