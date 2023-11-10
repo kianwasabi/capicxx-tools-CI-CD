@@ -9,12 +9,12 @@ on:
     paths:
       - 'fidl/**.fidl'
       - 'fidl/**.fdepl'
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches: [ "main" ]
-    paths:
-      - 'fidl/**.fidl'
-      - 'fidl/**.fdepl'
+  # pull_request:
+  #   types: [opened, synchronize, reopened]
+  #   branches: [ "main" ]
+  #   paths:
+  #     - 'fidl/**.fidl'
+  #     - 'fidl/**.fdepl'
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel.
@@ -48,7 +48,7 @@ jobs:
           echo $(find ${{ github.workspace }} -type f -name '*.fdepl')
           someip-generator/commonapi-someip-generator-linux-x86_64 $(find ${{ github.workspace }} -type f -name '*.fdepl') -d ${{ github.workspace }}/src-gen/someip
 
-      - name: 5) Save generated code in src-gen
+      - name: 6) Save generated code in src-gen
         if: github.event_name == 'push'
         run: |
           git config user.name "$(git log -n 1 --pretty=format:%an)"
@@ -56,10 +56,3 @@ jobs:
           git add src-gen
           git commit -m "Auto Generated fidl" || true 
           git push
-      
-      -  name: 6) Pull src-gen to local repository
-          if: github.event_name == 'pull_request'
-          run: |
-            git config user.name "$(git log -n 1 --pretty=format:%an)"
-            git config user.email "$(git log -n 1 --pretty=format:%ae)"
-            git pull origin main
