@@ -7,21 +7,20 @@
  * If a copy of the MPL was not distributed with this file, You can obtain one at
  * http://mozilla.org/MPL/2.0/.
  */
-#include <v0/commonapi/CarControlSomeIPDeployment.hpp>
+#include <v0/commonapi/CarInfoSomeIPDeployment.hpp>
 
 namespace v0 {
 namespace commonapi {
-namespace CarControl_ {
+namespace CarInfo_ {
 
 // Type-specific deployments
 
 // Attribute-specific deployments
 
 // Argument-specific deployment
-CommonAPI::SomeIP::StringDeployment gearSelectionHeadUnit_selectedGearDeployment(0, 4, CommonAPI::SomeIP::StringEncoding::UTF16LE);
 
 // Broadcast-specific deployments
 
-} // namespace CarControl_
+} // namespace CarInfo_
 } // namespace commonapi
 } // namespace v0

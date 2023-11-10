@@ -7,11 +7,11 @@
  * If a copy of the MPL was not distributed with this file, You can obtain one at
  * http://mozilla.org/MPL/2.0/.
  */
-#ifndef V0_COMMONAPI_CAR_CONTROL_SOMEIP_PROXY_HPP_
-#define V0_COMMONAPI_CAR_CONTROL_SOMEIP_PROXY_HPP_
+#ifndef V0_COMMONAPI_CAR_INFO_SOMEIP_PROXY_HPP_
+#define V0_COMMONAPI_CAR_INFO_SOMEIP_PROXY_HPP_
 
-#include <v0/commonapi/CarControlProxyBase.hpp>
-#include <v0/commonapi/CarControlSomeIPDeployment.hpp>
+#include <v0/commonapi/CarInfoProxyBase.hpp>
+#include <v0/commonapi/CommonTypesSomeIPDeployment.hpp>
 
 #if !defined (COMMONAPI_INTERNAL_COMPILATION)
 #define COMMONAPI_INTERNAL_COMPILATION
@@ -45,31 +45,24 @@
 namespace v0 {
 namespace commonapi {
 
-class CarControlSomeIPProxy
-    : virtual public CarControlProxyBase,
+class CarInfoSomeIPProxy
+    : virtual public CarInfoProxyBase,
       virtual public CommonAPI::SomeIP::Proxy {
 public:
-    CarControlSomeIPProxy(
+    CarInfoSomeIPProxy(
         const CommonAPI::SomeIP::Address &_address,
         const std::shared_ptr<CommonAPI::SomeIP::ProxyConnection> &_connection);
 
-    virtual ~CarControlSomeIPProxy();
+    virtual ~CarInfoSomeIPProxy();
 
-    virtual IndicatorAttribute& getIndicatorAttribute();
-
-    virtual GearAttribute& getGearAttribute();
-
-    virtual void gearSelectionHeadUnit(std::string _selectedGear, CommonAPI::CallStatus &_internalCallStatus, bool &_accepted, const CommonAPI::CallInfo *_info);
-
-    virtual std::future<CommonAPI::CallStatus> gearSelectionHeadUnitAsync(const std::string &_selectedGear, GearSelectionHeadUnitAsyncCallback _callback, const CommonAPI::CallInfo *_info);
+    virtual BatteryAttribute& getBatteryAttribute();
 
     virtual void getOwnVersion(uint16_t &_major, uint16_t &_minor) const;
 
     virtual std::future<void> getCompletionFuture();
 
 private:
-    CommonAPI::SomeIP::ObservableAttribute<CommonAPI::SomeIP::ReadonlyAttribute<IndicatorAttribute, CommonAPI::SomeIP::StringDeployment>> indicator_;
-    CommonAPI::SomeIP::ObservableAttribute<CommonAPI::SomeIP::ReadonlyAttribute<GearAttribute, CommonAPI::SomeIP::StringDeployment>> gear_;
+    CommonAPI::SomeIP::ObservableAttribute<CommonAPI::SomeIP::ReadonlyAttribute<BatteryAttribute, ::v0::commonapi::CommonTypes_::batteryStructDeployment_t>> battery_;
 
     std::promise<void> completed_;
 };
@@ -77,4 +70,4 @@ private:
 } // namespace commonapi
 } // namespace v0
 
-#endif // V0_COMMONAPI_Car_Control_SOMEIP_PROXY_HPP_
+#endif // V0_COMMONAPI_Car_Info_SOMEIP_PROXY_HPP_
