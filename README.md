@@ -28,7 +28,7 @@ The generated code is now ready to be used. <br>
 
 ## Note: 
 - The [DBus Generator](https://github.com/COVESA/capicxx-dbus-tools) is not integreated in this automation.<br>
-- There is also an official [workflow] (https://github.com/COVESA/capicxx-someip-tools/tree/master/.github/workflows) that recently has been added to the convesa's repositories.
+- There is also an official [workflow](https://github.com/COVESA/capicxx-someip-tools/tree/master/.github/workflows) that recently has been added to the convesa's repositories.
 
 Feel free to use this workflow as a tool for your own projects. Maybe you want to add more steps to the workflow or use it with other generators. Or maybe the workflow is not suitable for your project and you want to create your own workflow from scratch. In any case, I hope this workflow will be useful to you. I assume the official workflow will be well maintained in the future and this workflow will be obsolete. :) <br>
 
