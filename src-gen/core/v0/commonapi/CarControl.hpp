@@ -7,27 +7,18 @@
 * If a copy of the MPL was not distributed with this file, You can obtain one at
 * http://mozilla.org/MPL/2.0/.
 */
-#ifndef V0_COMMONAPI_Car_Info_PROXY_BASE_HPP_
-#define V0_COMMONAPI_Car_Info_PROXY_BASE_HPP_
-
-#include <v0/commonapi/CarInfo.hpp>
+#ifndef V0_COMMONAPI_CAR_CONTROL_HPP_
+#define V0_COMMONAPI_CAR_CONTROL_HPP_
 
 
-#include <v0/commonapi/CommonTypes.hpp>
+
 
 #if !defined (COMMONAPI_INTERNAL_COMPILATION)
 #define COMMONAPI_INTERNAL_COMPILATION
 #define HAS_DEFINED_COMMONAPI_INTERNAL_COMPILATION_HERE
 #endif
 
-#include <CommonAPI/Deployment.hpp>
-#include <CommonAPI/InputStream.hpp>
-#include <CommonAPI/OutputStream.hpp>
-#include <CommonAPI/Struct.hpp>
-#include <cstdint>
-
-#include <CommonAPI/Attribute.hpp>
-#include <CommonAPI/Proxy.hpp>
+#include <CommonAPI/Types.hpp>
 
 #if defined (HAS_DEFINED_COMMONAPI_INTERNAL_COMPILATION_HERE)
 #undef COMMONAPI_INTERNAL_COMPILATION
@@ -37,22 +28,31 @@
 namespace v0 {
 namespace commonapi {
 
-class CarInfoProxyBase
-    : virtual public CommonAPI::Proxy {
+class CarControl {
 public:
-    typedef CommonAPI::ObservableReadonlyAttribute<::v0::commonapi::CommonTypes::batteryStruct> BatteryAttribute;
+    virtual ~CarControl() { }
 
-
-    virtual BatteryAttribute& getBatteryAttribute() = 0;
-
-    virtual std::future<void> getCompletionFuture() = 0;
+    static inline const char* getInterface();
+    static inline CommonAPI::Version getInterfaceVersion();
 };
+
+const char* CarControl::getInterface() {
+    return ("commonapi.CarControl:v0_1");
+}
+
+CommonAPI::Version CarControl::getInterfaceVersion() {
+    return CommonAPI::Version(0, 1);
+}
+
 
 } // namespace commonapi
 } // namespace v0
+
+namespace CommonAPI {
+}
 
 
 // Compatibility
 namespace v0_1 = v0;
 
-#endif // V0_COMMONAPI_Car_Info_PROXY_BASE_HPP_
+#endif // V0_COMMONAPI_CAR_CONTROL_HPP_

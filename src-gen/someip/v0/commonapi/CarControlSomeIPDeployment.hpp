@@ -8,8 +8,8 @@
  * http://mozilla.org/MPL/2.0/.
  */
 
-#ifndef V0_COMMONAPI_COMMON_TYPES_SOMEIP_DEPLOYMENT_HPP_
-#define V0_COMMONAPI_COMMON_TYPES_SOMEIP_DEPLOYMENT_HPP_
+#ifndef V0_COMMONAPI_Car_Control_SOMEIP_DEPLOYMENT_HPP_
+#define V0_COMMONAPI_Car_Control_SOMEIP_DEPLOYMENT_HPP_
 
 
 #if !defined (COMMONAPI_INTERNAL_COMPILATION)
@@ -24,21 +24,21 @@
 
 namespace v0 {
 namespace commonapi {
-namespace CommonTypes_ {
+namespace CarControl_ {
 
-// typecollection-specific deployment types
-typedef CommonAPI::SomeIP::StructDeployment<
-    CommonAPI::EmptyDeployment,
-    CommonAPI::EmptyDeployment,
-    CommonAPI::EmptyDeployment,
-    CommonAPI::EmptyDeployment
-> batteryStructDeployment_t;
+// Interface-specific deployment types
 
+// Type-specific deployments
 
-// typecollection-specific deployments
+// Attribute-specific deployments
 
-} // namespace CommonTypes_
+// Argument-specific deployment
+COMMONAPI_EXPORT extern CommonAPI::SomeIP::StringDeployment gearSelectionHeadUnit_selectedGearDeployment;
+
+// Broadcast-specific deployments
+
+} // namespace CarControl_
 } // namespace commonapi
 } // namespace v0
 
-#endif // V0_COMMONAPI_COMMON_TYPES_SOMEIP_DEPLOYMENT_HPP_
+#endif // V0_COMMONAPI_Car_Control_SOMEIP_DEPLOYMENT_HPP_
