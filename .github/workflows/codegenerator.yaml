@@ -38,7 +38,7 @@ jobs:
       - name: Download CommonAPI vSOME/IP Generator
         run: |
           wget https://github.com/COVESA/capicxx-someip-tools/releases/download/3.2.0.1/commonapi_someip_generator.zip
-          unzip commonapi_core_generator.zip -d ${{ github.workspace }}/someip-generator
+          unzip commonapi_someip_generator.zip -d ${{ github.workspace }}/someip-generator
 
       - name: Generate CommonAPI Code from Core Generator
         run: |
